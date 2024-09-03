@@ -2,6 +2,8 @@ package io.github.dougllasfps.localizacao.service;
 
 import io.github.dougllasfps.localizacao.domain.entity.Cidade;
 import io.github.dougllasfps.localizacao.domain.repository.CidadeRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +30,10 @@ public class CidadeService {
     }
 
     public void listarCidadesPorNome(){
-        repository.findByNomeLike("Porto%", Sort.by("habitantes")).forEach(System.out::println);
+        Pageable pageable = PageRequest.of(3, 4);
+        repository
+                .findByNomeLike("%%%%", pageable)
+                .forEach(System.out::println);
     }
 
     public void listarCidadesPorHabitantes(){
