@@ -2,11 +2,15 @@ package io.github.dougllasfps.localizacao.service;
 
 import io.github.dougllasfps.localizacao.domain.entity.Cidade;
 import io.github.dougllasfps.localizacao.domain.repository.CidadeRepository;
+import io.github.dougllasfps.localizacao.domain.repository.specs.CidadeSpecs.*;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static io.github.dougllasfps.localizacao.domain.repository.specs.CidadeSpecs.*;
 
 @Service
 public class CidadeService {
@@ -51,5 +55,11 @@ public class CidadeService {
                 .withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
         Example<Cidade> example = Example.of(cidade, matcher);
         return repository.findAll(example);
+    }
+
+    public void listarCidadesByNomeSpec(){
+        repository
+                .findAll(nomeEqual("São Paulo").and(idEqual(1L)))
+                .forEach(System.out::println);
     }
 }
