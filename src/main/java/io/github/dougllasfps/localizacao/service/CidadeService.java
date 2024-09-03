@@ -2,11 +2,14 @@ package io.github.dougllasfps.localizacao.service;
 
 import io.github.dougllasfps.localizacao.domain.entity.Cidade;
 import io.github.dougllasfps.localizacao.domain.repository.CidadeRepository;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class CidadeService {
@@ -42,5 +45,11 @@ public class CidadeService {
 
     void listarCidades(){
         repository.findAll().forEach(System.out::println);
+    }
+
+    public List<Cidade> filtroDinamico(Cidade cidade){
+
+        Example<Cidade> example = Example.of(cidade);
+        return repository.findAll(example);
     }
 }
