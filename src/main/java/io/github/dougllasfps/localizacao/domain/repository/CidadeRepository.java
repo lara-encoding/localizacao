@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface CidadeRepository extends JpaRepository<Cidade, Long>, JpaSpecificationExecutor<Cidade> {
 
-    @Query(nativeQuery = true, value = "select c.id_cidade, c.nome from tb_cidade as c where c.nome =:nome ")
+    @Query(nativeQuery = true, value = "select c.id_cidade as id, c.nome from tb_cidade as c where c.nome =:nome ")
     List<CidadeProjection> findByNomeSqlNativo(@Param("nome") String nome);
 
     // busca pelo nome correto
