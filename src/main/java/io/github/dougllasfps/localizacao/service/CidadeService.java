@@ -34,6 +34,12 @@ public class CidadeService {
                 .forEach(System.out::println);
     }
 
+    public void listarCidadesPorNomeSQL(){
+        repository
+                .findByNomeSqlNativo("São Paulo")
+                .forEach(System.out::println);
+    }
+
     public void listarCidadesPorNome(){
         Pageable pageable = PageRequest.of(3, 4);
         repository
